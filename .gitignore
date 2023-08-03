@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+package-lock.json
+dist/
+/build
+/package
+config/db.config.js
+.env.*
+!.env.example
+.env
