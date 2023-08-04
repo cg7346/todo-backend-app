@@ -11,10 +11,10 @@ Build a backend app that exposes a simple HTTP API for a ToDo list.
 
 <b>The app shall implement:</b>  
 
-- [ ] CRUD operations
-- [ ]  List of all ToDo items
-- [ ] List of completed
-- [ ] List of deleted
+- [x] CRUD operations
+- [x]  List of all ToDo items
+- [x] List of completed
+- [x] List of deleted
 - [ ] All the unit tests for the functionalities listed above
 - [ ] The code must be published on a git repository (github, gitlab, etc.)  
 

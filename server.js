@@ -1,11 +1,11 @@
 var http = require("http");
 var fs = require("fs");
 var handlebars = require("handlebars");
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 var template = fs.readFileSync("./index.html", "utf8");
-const database = require('./config/db');
+const database = require("./config/db");
 
 // create express app
 const app = express();
@@ -17,26 +17,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // define a root route
-app.get('/', (req, res) => {
-    // var source = {
-    //     message : "Hello world!"
-    // };
+app.get("/", (req, res) => {
+  // var source = {
+  //     message : "Hello world!"
+  // };
 
-    var pageBuilder = handlebars.compile(template);
-    var pageText = pageBuilder(source);
-    res.writeHead(200, {"Context-Type": "text/html"});
-    res.write(pageText);
-    res.end();
+  var pageBuilder = handlebars.compile(template);
+  var pageText = pageBuilder();
+  res.writeHead(200, { "Context-Type": "text/html" });
+  res.write(pageText);
+  res.end();
 });
 
 // database configuration routes
 require("./app/routes/db.route")(app);
-
-// TODO: add tasks route 
+require("./app/routes/todo.route")(app);
 
 // setup server port
-const PORT = process.env.PORT || 8000; 
-  
+const PORT = process.env.PORT || 8000;
+
 // set port, listen for requests
 app.listen(PORT, () => {
   console.log(`Server is up and running on http://localhost:${PORT}`);

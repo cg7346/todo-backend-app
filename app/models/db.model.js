@@ -50,7 +50,7 @@ Database.createTable = (result) => {
   let createTableQuery = `
         CREATE TABLE ${tableName} (
             ID SERIAL PRIMARY KEY NOT NULL,
-            tasks VARCHAR(150) NOT NULL,
+            task VARCHAR(150) NOT NULL,
             status SMALLINT DEFAULT 0
         );
     `;
@@ -61,7 +61,7 @@ Database.createTable = (result) => {
       result(null, err);
       return;
     }
-    console.log(`Database table [${tableName}] dropped.`);
+    console.log(`Database table ${tableName} dropped.`);
 
     sql.query(createTableQuery, (error, res) => {
       if (error) {
@@ -70,7 +70,7 @@ Database.createTable = (result) => {
         return;
       }
 
-      console.log(`Successfully created [${tableName}] table in database!`);
+      console.log(`Successfully created ${tableName} table in database!`);
       result(null, res);
     });
   });
