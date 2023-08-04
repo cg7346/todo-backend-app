@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 var template = fs.readFileSync("./index.html", "utf8");
+const database = require('./config/db');
 
 // create express app
 const app = express();
@@ -28,7 +29,9 @@ app.get('/', (req, res) => {
     res.end();
 });
 
-// TODO: add db creation route
+// database configuration routes
+require("./app/routes/db.route")(app);
+
 // TODO: add tasks route 
 
 // setup server port

@@ -44,26 +44,26 @@ Build a backend app that exposes a simple HTTP API for a ToDo list.
 1. In the **`/config`** directory create a file called **`db.config.js`**:
 
    ```js
-    'user strict';
+      'user strict';
 
-    const mysql = require('mysql');
+      const mysql = require('mysql');
 
-    //local mysql db connection
-    const db_con = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'PLACEHOLDER',
-    password : 'PLACEHOLDER'
-    });
+      //local mysql db connection
+      const db_server = mysql.createConnection({
+      host     : 'localhost',
+      user     : 'root',
+      password : 'password'
+      });
 
-    db_con.connect((err) => {
-        if (err) {
-        console.log("Database Connection Failed !!!", err);
-        } else {
-        console.log("connected to Database");
-        }
-    });
+      db_server.connect((err) => {
+         if (err) {
+            console.log("Database Server Connection Failed !!!", err);
+         } else {
+            console.log("connected to MySQL Server");
+         }
+      });
 
-    module.exports = db_con;
+      module.exports = db_server;
    ```
    
    **NOTE:** replace `PLACEHOLDER` with your local db username and password
