@@ -5,7 +5,7 @@ module.exports = (app) => {
   const todo = require("../controllers/todo.controller.js");
 
   // create a new todo
-  router.post("/create", todo.create);
+  router.post("/", todo.create);
 
   // all the pending todo's
   router.get("/", todo.tasks);
@@ -18,6 +18,9 @@ module.exports = (app) => {
 
   // update todo
   router.patch("/:id", todo.update);
+
+  // delete todo
+  router.delete("/:id", todo.delete);
 
   // for now this is used will update to hide this based on user authentication
   app.use("/todo", router);

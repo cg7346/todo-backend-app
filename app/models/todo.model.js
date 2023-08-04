@@ -95,4 +95,26 @@ Todo.updateTodo = (id, task, status, result) => {
   );
 };
 
+// delete a task name by id
+Todo.deleteTodo = (id, result) => {
+  sql.query("DELETE FROM Tasks WHERE id = ?", id, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows == 0) {
+      // not found Nomination with the id
+      result({ kind: "not_found" }, null);
+      return;
+    }
+
+    console.log("deleted task: ", {
+      id: `${id}`,
+    });
+    result(null, { id: `${id}`});
+  });
+};
+
 module.exports = Todo;

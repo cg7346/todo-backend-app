@@ -21,7 +21,7 @@ exports.create = (req, res) => {
       res.status(500).send({
         message: err.message || "Some error occurred while creating a task.",
       });
-    else res.send(data);
+    else res.status(200).send(data);
   });
 };
 
@@ -32,7 +32,7 @@ exports.tasks = (req, res) => {
       res.status(500).send({
         message: err.message || "Some error occurred while getting tasks.",
       });
-    else res.send(data);
+    else res.status(200).send(data);
   });
 };
 
@@ -45,7 +45,7 @@ exports.completed = (req, res) => {
           err.message ||
           "Some error occurred while retrieving completed tasks.",
       });
-    else res.send(data);
+    else res.status(200).send(data);
   });
 };
 
@@ -57,7 +57,7 @@ exports.deleted = (req, res) => {
         message:
           err.message || "Some error occurred while retrieving deleted tasks.",
       });
-    else res.send(data);
+    else res.status(200).send(data);
   });
 };
 
@@ -72,14 +72,34 @@ exports.update = (req, res) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Todo not found with id ${req.body.id}.`,
+            message: `Todo not found with id ${req.params.id}.`,
           });
         } else {
           res.status(500).send({
-            message: `Error updating Todo with id ${req.body.id}`,
+            message: `Error updating Todo with id ${req.params.id}`,
           });
         }
-      } else res.send(data);
+      } else res.status(200).send(data);
     }
   );
 };
+
+exports.delete = (req, res) => {
+    Todo.deleteTodo(
+      parseInt(`${req.params.id}`),
+      (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Todo not found with id ${req.params.id}.`,
+            });
+          } else {
+            res.status(500).send({
+              message: `Error updating Todo with id ${req.params.id}`,
+            });
+          }
+        } else res.status(200).send(data);
+      }
+    );
+  };
+
