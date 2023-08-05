@@ -2,9 +2,152 @@
 <html lang="en">
 	<head>
 		<title>Rabobank - Todo List</title>
-        <h1>Welcome!</h1>
+        <h1 style="text-align: center">
+			<em>Rabobank - Todo List</em>
+		</h1>
+		<h4 style="text-align: center">by Celeste Gambardella</h4>
 	</head>
 	<body>
-		<h3>User Manual:</h3>
+		<hr>
+		<h2>User Manual</h2>
+		<h3>Prerequisites</h3>
+		<blockquote>
+			<p>
+				<ul>
+					<li>MySQL installed</li>
+					<li><b>db.js</b> file configured</li>
+				</ul>
+			</p>
+		</blockquote>
+
+		<hr style="border-top: 3px dotted #bbb; border-bottom: 0px;">
+
+		<h3>Setup - Todo List</h3>
+		<blockquote>
+			<p>
+				<ol>
+					<li>
+						Within the main root directory of the application you will need to do the following commands in terminal:<br>
+						&nbsp &nbsp <b>npm install</b><br>
+						<em>this will install all the necessary packages needed to run the application</em><br>
+						&nbsp &nbsp <b>npm start</b><br>
+						<em>This starts the application and where you should see if the database server is connected to properly</em><br>
+						<b>If fails double check your <em>db.js</em> file has the correct user and password.</b>
+					</li>
+					<li>
+						Initialize the database by going to <b>GET /database</b> route - <a href="http://localhost:8000/database">localhost:8000/database</a>
+						<p>This needs to be at the beginning of application otherwise when using the todo list the database call will fail.</p>
+					</li>
+					<li>
+						Creation of <b>Tasks</b> table within database by going to <b>GET /database/createTable</b> route - <a href="http://localhost:8000/database/createTable">localhost:8000/database/createTable</a>
+						<p>This Initializes the table in the database where all the tasks for the todo list are stored</p> 
+					</li>
+				</ol>
+			</p>
+		</blockquote>
+
+		<hr style="border-top: 3px dotted #bbb; border-bottom: 0px;">
+		<h3>Instructions - Todo List</h3>
+		<blockquote>
+			<p>
+				Within this application a todo task can be created, the user can view all pending tasks, completed tasks, and deleted tasks, they can edit tasks, and permanently deleted tasks. A Task can have the following statuses:
+				<ul>
+					<li><b>0</b>: pending tasks</li>
+					<li><b>1</b>: completed tasks</li>
+					<li><b>-1</b>: deleted tasks</li>
+				</ul>
+				<br>This is done because we do not want to accually delete a task from the database but rather just change the status of the task.
+			</p>
+			<h4>The todo list contains the following API calls:</h4>
+		</blockquote>
+		<h4><b>CREATE a Todo task</b></h4>
+		<blockquote>
+			<p>
+				<b>POST /todo</b><br>
+				To create a task in the Todo list you need to send a <b>POST</b> request to <b>localhost:8000/todo</b> Within the POST request the body must contain a task as such:<br>
+				<b>
+					&nbsp &nbsp {<br>
+						&nbsp &nbsp &nbsp &nbsp "task": "My First Todo"<br>
+					&nbsp &nbsp }<br>
+				</b>
+				By default the task will assign an <b>id</b> and <b>status</b> of 0 <b>pending</b>.
+			</p>
+		</blockquote>
+
+		<h4><b>GET all pending Todo tasks</b></h4>
+		<blockquote>
+			<p>
+				<b>GET /todo</b><br>
+				To get all tasks in the Todo list you need to send a <b>GET</b> request to <a href="http://localhost:8000/todo">localhost:8000/todo</a>. Nothing should be within the body of the request. By default, any new todo created will be shown in this list.
+			</p>
+		</blockquote>
+		<h4><b>UPDATE a Todo task</b></h4>
+		<blockquote>
+			<p>
+				<b>PATCH /todo/:id</b><br>
+				To update a task in the Todo list you need to send a <b>PATCH</b> request to <b>localhost:8000/todo/<em>:id</em></b>. When sending request you need specify the todo <b>ID</b> in the parameters. For example:<br>
+				&nbsp &nbsp <b>localhost:8000/todo/<em>1</em></b><br>
+
+				Within the PATCH request the body must contain a task as such:<br>
+				<b>
+					&nbsp &nbsp {<br>
+						&nbsp &nbsp &nbsp &nbsp "task": "My First Todo",<br>
+						&nbsp &nbsp &nbsp &nbsp "status": 1<br>
+					&nbsp &nbsp }<br>
+				</b>
+				<em>above is an example of marking a todo as completed</em><br>
+				<b>
+					&nbsp &nbsp {<br>
+						&nbsp &nbsp &nbsp &nbsp "task": "My First Todo",<br>
+						&nbsp &nbsp &nbsp &nbsp "status": -1<br>
+					&nbsp &nbsp }<br>
+				</b>
+				<em>above is an example of marking a todo as deleted</em><br>
+
+				You can also edit the task name here.
+			</p>
+		</blockquote>
+
+		<h4><b>GET all completed Todo tasks</b></h4>
+		<blockquote>
+			<p>
+				<b>GET /todo/completed</b><br>
+				To get all tasks in the Todo list that have been completed you need to send a <b>GET</b> request to <a href="http://localhost:8000/todo/completed">localhost:8000/todo/completed</a>. Nothing should be within the body of the request.<br>
+				<em>In order to see a todo within this list the todo needs to be created with a <b>POST</b> request. Then edited to be marked as completed with a <b>PATCH</b> request with a <b>status</b> of <b>1</b> in the body of the request. Follow above instructions on how todo so.</em>
+			</p>
+		</blockquote>
+
+		<h4><b>GET all deleted Todo tasks</b></h4>
+		<blockquote>
+			<p>
+				<b>GET /todo/deleted</b><br>
+				To get all tasks in the Todo list that have been deleted you need to send a <b>GET</b> request to <a href="http://localhost:8000/todo/deleted">localhost:8000/todo/deleted</a>.<br>
+				Nothing should be within the body of the request.<br>
+				<em>In order to see a todo within this list the todo needs to be created with a <b>POST</b> request. Then edited to be marked as completed with a <b>PATCH</b> request with a <b>status</b> of <b>-1</b> in the body of the request. Follow above instructions on how todo so.</em>
+			</p>
+		</blockquote>
+
+		<h4><b>Permanently delete a Todo task</b></h4>
+		<blockquote>
+			<p>
+				<b>DELETE /todo/:id</b><br>
+				There is also the ability to permanently delete a todo task but this should not be used as this would get rid of the task completely from the database. <br>
+				This is used only for testing purposes.
+				
+				To delete a task permanently in the Todo list you need to send a <b>DELETE</b> request to <b>localhost:8000/todo/<em>:id</em></b>.<br>
+				When sending request you need specify the todo <b>ID</b> in the parameters. For example:<br>
+				&nbsp &nbsp <b>localhost:8000/todo/<em>1</em></b><br>
+			</p>
+		</blockquote>
+
+		<hr style="border-top: 3px dotted #bbb; border-bottom: 0px;">
+		<h3>Testing - Todo List</h3>
+		<blockquote>
+			<p>
+				To run all the tests for the application the server must being running as instructed in the Setup (Step 1).<br>
+				Once the server is running open a new terminal and run the following command to run all the db and todo list tests:<br>
+				&nbsp &nbsp <b>npm test</b>
+			<p>
+		</blockquote>
 	</body>
 </html>

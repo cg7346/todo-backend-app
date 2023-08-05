@@ -10,7 +10,7 @@ const Todo = function (todo) {
 Todo.create = (newTodo, result) => {
   // console.log("Model: ", newTodo.task, newTodo);
   sql.query(
-    'INSERT INTO Tasks (task) VALUES ("?")',
+    'INSERT INTO Tasks (task) VALUES (?)',
     `${newTodo.task}`,
     (err, res) => {
       if (err) {

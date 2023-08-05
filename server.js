@@ -1,4 +1,3 @@
-var http = require("http");
 var fs = require("fs");
 var handlebars = require("handlebars");
 const express = require("express");
@@ -18,10 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // define a root route
 app.get("/", (req, res) => {
-  // var source = {
-  //     message : "Hello world!"
-  // };
-
   var pageBuilder = handlebars.compile(template);
   var pageText = pageBuilder();
   res.writeHead(200, { "Context-Type": "text/html" });
