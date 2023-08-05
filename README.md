@@ -158,14 +158,13 @@ This is done because we do not want to accually delete a task from the database 
 
 #### **UPDATE a Todo task**
 
-**PATCH /todo/:id**
-
+> **PATCH /todo/:id**
+>
 > To update a task in the Todo list you need to send a **PATCH** request to **localhost:8000/todo/\*:id\***. When sending request you need specify the todo **ID** in the parameters. For example:
->
 > ```http
-> localhost:8000/todo/1
+>localhost:8000/todo/1
 > ```
->
+> 
 > Within the PATCH request the body must contain a task as such:
 
 > **COMPLETE Todo**
@@ -191,10 +190,10 @@ This is done because we do not want to accually delete a task from the database 
 
 #### **GET all completed Todo tasks**
 
-**GET /todo/completed**
-
-> To get all tasks in the Todo list that have been completed you need to send a **GET** request to [localhost:8000/todo/completed](http://localhost:8000/todo/completed). Nothing should be within the body of the request.
+> **GET /todo/completed**
 >
+> To get all tasks in the Todo list that have been completed you need to send a **GET** request to [localhost:8000/todo/completed](http://localhost:8000/todo/completed). Nothing should be within the body of the request.
+
 > **In order to see a todo within this list:**
 >
 > 1. The todo needs to be created with a **POST** request
@@ -205,28 +204,28 @@ This is done because we do not want to accually delete a task from the database 
 
 #### **GET all deleted Todo tasks**
 
-**GET /todo/deleted**
-
+> **GET /todo/deleted**
+>
 > To get all tasks in the Todo list that have been deleted you need to send a **GET** request to [localhost:8000/todo/deleted](http://localhost:8000/todo/deleted). Nothing should be within the body of the request.
-> 
->**In order to see a todo within this list:**
+
+> **In order to see a todo within this list:**
 > 
 >1. The todo needs to be created with a **POST** request
 > 
 >2. Edited to be marked as completed with a **PATCH** request with a **status** of **-1** in the body of the request.
 > 
->   ​	*Follow above instructions on how todo so*	
+>  ​	*Follow above instructions on how todo so*	
 
 #### **Permanently delete a Todo task**
 
-**DELETE /todo/:id**
-
+> **DELETE /todo/:id**
+>
 > There is also the ability to permanently delete a todo task but this should not be used as this would get rid of the task completely from  the database. This is used only for testing purposes. To delete a task permanently in the Todo list you need to send a **DELETE** request to **localhost:8000/todo/:id**\.
 > When sending request you need specify the todo **ID** in the parameters. For example:
-> 
->```http
+
+> ```http
 > localhost:8000/todo/1
->```
+> ```
 
 ------
 
