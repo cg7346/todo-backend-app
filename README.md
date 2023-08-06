@@ -51,8 +51,8 @@ Build a backend app that exposes a simple HTTP API for a ToDo list.
       //local mysql db connection
       const db_server = mysql.createConnection({
       host     : 'localhost',
-      user     : 'root',
-      password : 'password'
+      user     : 'PLACEHOLDER',
+      password : 'PLACEHOLDER'
       });
 
       db_server.connect((err) => {
